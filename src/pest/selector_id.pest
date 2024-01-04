@@ -1,0 +1,1 @@
+identifier = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "-" )* ~ (ASCII_ALPHANUMERIC | "-" | "_" )* }
