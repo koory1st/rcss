@@ -1,26 +1,28 @@
+use std::collections::{HashMap, HashSet};
+
 fn main() {
     println!("Hello, world!");
+    //
+    // let id_selector: Selector = Selector::Id(SelectorId::new(".111"));
+    // dbg!(&id_selector);
 
-    let id_selector: Selector = Selector::Id(SelectorId::new(".111"));
-    dbg!(&id_selector);
+
+    let mut set = Selectors::new();
+    set.insert("aa");
+    set.insert(".bbbb");
+
+    let a:Rule = ("1", "b") ;
 }
 
-#[derive(Debug)]
-struct SelectorId<'a>(&'a str);
-
-impl <'a> SelectorId<'a> {
-    fn new(id: &'a str) -> Self {
-        if id.starts_with(&".") {
-            panic!("id should not start with '.'");
-        }
-        Self(id)
-    }
-}
 
 // https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#keywords
 
-#[derive(Debug)]
-enum Selector<'a> {
-    Id(SelectorId<'a>),
-}
 
+type Selectors<'a> =  HashSet<&'a str>;
+type Rule<'a> = (&'a str, &'a str);
+
+struct  Declaration<'a> {
+    sub: Declaration<'a>,
+    selectors: Selectors<'a>,
+    rules:  Vec<Rule<'a>>,
+}
